@@ -3,7 +3,7 @@
 require_once 'database.php';
 
 // Define variables and initialize with empty values
-$username = $password = "";
+$username = $password = $image="";
 $username_err = $password_err = "";
 
 // Processing form data when form is submitted
@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username_err = 'Please enter username.';
     } else {
         $username = trim($_POST["username"]);
+       
     }
 
     // Check if password is empty
@@ -44,19 +45,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (mysqli_stmt_num_rows($stmt) == 1) {
                     // Bind result variables
                     mysqli_stmt_bind_result($stmt, $username, $hashed_password);
-                    $sq = "SELECT password FROM users";
+                    $sq = "SELECT password,avatar FROM users";
                     $result = $link->query($sq);
                     $hashed_password = null;
                     if ($result->num_rows > 0) {
                         // output data of each row
                         while ($row = $result->fetch_assoc()) {
                             $hashed_password = $row['password'];
+                            $image=$row['avatar'];
                         }
                     }
-                    echo($username);
-                    echo($password);
-                    echo( $hashed_password);
-echo("ended");
+//                    echo($username);
+//                    echo($password);
+//                    echo( $hashed_password);
+//echo("ended");
 
                     if (mysqli_stmt_fetch($stmt)) {
                         if ($password=== $hashed_password) {
@@ -64,6 +66,7 @@ echo("ended");
                               save the username to the session */
                             session_start();
                             $_SESSION['username'] = $username;
+                             $_SESSION['avatar'] = $image;
                             header("location: welcome.php");
                         } else {
                             // Display an error message if password is not valid
