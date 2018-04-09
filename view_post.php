@@ -11,14 +11,15 @@ if (!is_numeric($post_id)) {
     header('location: index.php');
 }
 
-$sql = "SELECT post_title, content WHERE post_id='$post_id'";
+$sql = "SELECT post_title, content FROM posts WHERE post_id='$post_id'";
 $query = $link->query($sql);
 
 //echo $query->num_rows;  one for each post_id
-//if ($query->num_rows != 1){
-//    header('location: index.php');
-//    exit();
-//} 
+//
+if ($query->num_rows != 1){
+    header('location: index.php');
+    exit();
+} 
 ?>
 
 <?php
@@ -38,11 +39,11 @@ $query = $link->query($sql);
   <h2 align="center"><a href="#">Blog Title</h2></a></h2>
   
         <div id="wrapper">
-            //<?php
-//            $row = $query->fetch_object();
-//            echo "<h2>".$row->post_title."<h2>";
-//            echo "<p>".$row->$content."<p>";            
-//            
+            <?php
+            $row = $query->fetch_object();
+            echo "<h2>".$row->post_title."<h2>";
+            echo "<p>".$row->content."<p>";            
+            
             ?>            
         </div>
   <hr />
@@ -58,6 +59,7 @@ $query = $link->query($sql);
     </div>
     <div class="form-group">
      <input type="hidden" name="comment_id" id="comment_id" value="0" />
+     <input type="hidden" name="post_id" id="post_id" value="<?php echo $post_id?>" />
      <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
     </div>
    </form>
@@ -97,7 +99,7 @@ $(document).ready(function(){
  function load_comment()
  {
   $.ajax({
-   url:"fetch_comment.php",
+   url:"fetch_comment.php?post_id=<?php echo $post_id?>",
    method:"POST",
    success:function(data)
    {

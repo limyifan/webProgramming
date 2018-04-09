@@ -4,7 +4,7 @@ session_start();
 
 // If session variable is not set it will redirect to login page
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
-    header("location: login.php");
+    header("Location: login.php");
     exit;
 }
 ?>
@@ -62,7 +62,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
             <h1>Hi, <b><?php echo htmlspecialchars($_SESSION['username']); ?></b>. Welcome to our site.</h1>
             <div id="menu">
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                     <li><a href="new_post.php">Create New Post</a></li>
                     <li><a href="#">Delete Post</a></li>
                     <li style="float:right"><a href="logout.php">Log Out</a></li>

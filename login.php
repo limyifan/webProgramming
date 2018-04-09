@@ -27,34 +27,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate credentials
     if (empty($username_err) && empty($password_err)) {
         // Prepare a select statement
-        $sql = "SELECT name, password FROM users WHERE name = ?";
+        $sql = "SELECT user_id, name, password, avatar FROM users WHERE name = ?";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
+            mysqli_stmt_bind_param($stmt, "s", $username);
 
             // Set parameters
-            $param_username = $username;
-
+            //$param_username = $username;
+            
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
+                echo "username exists";
                 // Store result
                 mysqli_stmt_store_result($stmt);
 
                 // Check if username exists, if yes then verify password
                 if (mysqli_stmt_num_rows($stmt) == 1) {
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $username, $hashed_password);
-                    $sq = "SELECT password,avatar FROM users";
-                    $result = $link->query($sq);
-                    $hashed_password = null;
-                    if ($result->num_rows > 0) {
-                        // output data of each row
-                        while ($row = $result->fetch_assoc()) {
-                            $hashed_password = $row['password'];
-                            $image=$row['avatar'];
-                        }
-                    }
+                    mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $image);
+//                    $sq = "SELECT password,avatar FROM users";
+//                    $result = $link->query($sq);
+//                    $hashed_password = null;
+//                    if ($result->num_rows > 0) {
+//                        // output data of each row
+//                        while ($row = $result->fetch_assoc()) {
+//                            $hashed_password = $row['password'];
+//                            $image=$row['avatar'];
+//                        }
+//                    }
 //                    echo($username);
 //                    echo($password);
 //                    echo( $hashed_password);
@@ -65,8 +66,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             /* Password is correct, so start a new session and
                               save the username to the session */
                             session_start();
-                            $_SESSION['username'] = $username;
+                             $_SESSION['user_id'] = $id;
+                             $_SESSION['username'] = $username;
                              $_SESSION['avatar'] = $image;
+                             
                             header("location: welcome.php");
                         } else {
                             // Display an error message if password is not valid

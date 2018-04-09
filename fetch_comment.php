@@ -4,9 +4,15 @@
 
 $connect = new PDO('mysql:host=localhost;dbname=webprogrammingcasem2', 'root', '');
 
+if( isset($_GET['post_id'])){
+    $post_id = $_GET['post_id'];
+}else{
+    echo "This is not how it works";
+    die();
+}
 $query = "
 SELECT * FROM comments 
-WHERE parent_comment_id = '0' 
+WHERE post_id = ".$post_id." 
 ORDER BY comment_id DESC
 ";
 
