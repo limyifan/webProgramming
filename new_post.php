@@ -4,10 +4,10 @@ session_start();
 include_once ('database.php');
 
 //make sure you are logged in
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit();
-}
+//if (!isset($_SESSION['user_id'])) {
+//    header('Location: login.php');
+//    exit();
+//}
 
 if (isset($_POST['submit'])) {
     echo "POST IS SET 2";

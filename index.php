@@ -42,13 +42,65 @@ $query->bind_result($post_id, $post_title, $content);
                 margin: auto;
                 width: 800px;
             }
+            body{ 
+                font: 14px sans-serif;
+                text-align: center; 
+            }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+            }
+            a:link {
+                text-decoration: none;
+            }
+
+            li {
+                float: left;
+                border-right:1px solid #bbb;
+            }
+
+            li:last-child {
+                border-right: none;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            li a:hover:not(.active) {
+                background-color: #ff6666;
+            }
+
+            .active {
+                background-color: #4CAF50;
+            }
         </style>
         <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
 
     </head>
     <body>
+        <div class="page-header">
+            <h1>Welcome to our site</h1>
+            <div id="menu">
+                <ul>
+                    <li><a href="#">Search For Blog</a></li>
+                    <li><a href="new_post.php">Create New Post</a></li>
+                    <li style="float:right"><a href="register.php">Register</a></li>
+                    <li style="float:right"><a href="login.php">Log In</a></li>
+                </ul>            
+            </div>
+        </div><br>
 
         <div id="container">
+            
+             
 <?php
 while ($query->fetch()):
     $lastspace = strrpos($content, ' ')
