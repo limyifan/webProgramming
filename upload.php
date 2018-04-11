@@ -11,7 +11,7 @@ $query = "insert into users
     (name,email,password,avatar)"
         ." VALUES 
         (:np_name, :np_email, :np_pass, :np_img)";
-$statement = $db->prepare($query);
+$statement = $link->prepare($query);
 $statement->bindValue(":np_name",$name);
 $statement->bindValue(":np_email",$email);
 $statement->bindValue(":np_pass",$pass);
