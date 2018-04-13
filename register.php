@@ -129,12 +129,71 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <meta charset="UTF-8">
         <title>Sign Up</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+          <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet">
         <style type="text/css">
             body{ font: 14px sans-serif; }
-            .wrapper{ width: 350px; padding: 20px; }
+            .wrapper{ width: 900px; padding: 160px; margin-left: 30%; }
+            #container {
+                margin: auto;
+                width: 800px;
+            }
+            body{ 
+                font: 14px sans-serif;
+                text-align: center; 
+            }
+           #ul1 {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+            }
+            a:link {
+                text-decoration: none;
+            }
+
+            #li1 {
+                float: left;
+                border-right:1px solid #bbb;
+            }
+
+              #li1:last-child {
+                border-right: none;
+            }
+
+            #li1 a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+              #li1 a:hover:not(.active) {
+                background-color: #ff6666;
+            }
+
+             #li1 .active {
+                background-color: #4CAF50;
+            }
         </style>
     </head>
     <body>
+               <div class="page-header">
+            <h1>Welcome to our site</h1>
+            <div id="menu">
+                <ul id="ul1">
+                    <li id="li1"><a href="#">Search For Blog</a></li>
+                    <li id="li1"><a href="new_post.php">Create New Post</a></li>
+                      <li id="li1" style="float:right"><a href="index1.php">Home</a></li>
+                    <li id="li1" style="float:right"><a href="register.php">Register</a></li>
+                    <li  id="li1"style="float:right"><a href="login.php">Log In</a></li>
+                </ul>            
+            </div>
+        </div><br>
         <div class="wrapper">
             <h2>Sign Up</h2>
             <p>Please fill this form to create an account.</p>
