@@ -66,6 +66,10 @@ and open the template in the editor.
                 <form action="#" method="post" >
                     <input placeholder="Title" name="post_title" type="text" autofocus size="48"><br/><br/>
                     <textarea name="content" placeholder="Content" rows="20" cols="50"></textarea><br/>
+                    <br>
+                    <p>Enter some tags:</p>
+                    <input type="text" name="tags"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="disable_comments" value="disable_comments">Disable Comments<br><br/>
                     <input name="submit" type="submit" value="Post">
 
                 </form>
