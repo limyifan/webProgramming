@@ -74,4 +74,42 @@ $(document).ready(function () {
             $(".aval,.exists, .wait").remove();
         }
     });
+    
+    
+        $("#lu").change(function () {
+        //Remove any span after the text field
+        $(".aval,.exists,.wait").remove();
+        //Display a loading gif image
+        $("<span class='wait'></span>").insertAfter("#lu");
+        var lu = $(this).val();
+        if (lu != "") {
+            var len = lu.length;
+            if (len!==0) {
+                //Username must be 5 to 10 characters long.
+                //Change accrodangly yours
+                $.ajax({
+                    url: "loginCheck.php",
+                    data: {lu: lu},
+                    type: 'POST',
+                    success: function (response) {
+                        var resp = $.trim(response);
+                        $(".aval,.exists, .wait").remove();
+                        if (resp == "exists") {
+                          
+                        } else if (resp == "notexists") {
+                            //If username is available it will display the following message
+                            $("<span class='aval'>This Username cant be found in the Database!</span>").insertAfter("#lu");
+                        }
+                    }
+                });
+            } else {
+                //If the given username is less than 5 or greater than 10 this warning will display
+                $(".aval,.exists, .wait").remove();
+                $("<span class='exists'>Username must be 5 to 10 characters long!</span>").insertAfter("#lu");
+            }
+        } else {
+            //If the field is empty then remove any span after the text field
+            $(".aval,.exists, .wait").remove();
+        }
+    });
 });
