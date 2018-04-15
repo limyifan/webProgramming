@@ -155,7 +155,7 @@ while ($query->fetch()):
             }
             ?>
           <!-- Blog Post -->
-          <div class="card mb-4">
+<!--          <div class="card mb-4">
             <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
             <div class="card-body">
               <h2 class="card-title">Post Title</h2>
@@ -166,18 +166,18 @@ while ($query->fetch()):
               Posted on January 1, 2017 by
               <a href="#">Blog</a>
             </div>
-          </div>
+          </div>-->
 
 
           <!-- Pagination -->
-          <ul class="pagination justify-content-center mb-4">
+<!--          <ul class="pagination justify-content-center mb-4">
             <li class="page-item">
               <a class="page-link" href="#">&larr; Older</a>
             </li>
             <li class="page-item disabled">
               <a class="page-link" href="#">Newer &rarr;</a>
             </li>
-          </ul>
+          </ul>-->
 
         </div>
 
