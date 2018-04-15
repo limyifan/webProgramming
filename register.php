@@ -179,7 +179,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
              #li1 .active {
                 background-color: #4CAF50;
             }
+            
+            span { clear:both; display:block; margin-bottom:30px; }
+span a { font-weight:bold; color:#0099FF; }
+label { margin-top:20px; margin-bottom:3px; font-weight:bold;}
+#username { padding:2px 5px; }
+span.exists {color:#FF0000;background:url(images/cross.png);}
+span.aval { color:#00CC00; background:url(images/ok.png);}
+span.wait { background:url(images/loading.gif);}
+span.exists, span.aval, span.wait {font-weight:normal; display:inline; clear:none; background-repeat:no-repeat; background-position:left; padding: 5px 30px; }
         </style>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery_ajax.js"></script>
     </head>
     <body>
                <div class="page-header">
@@ -195,17 +206,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div><br>
         <div class="wrapper">
-            <h2>Sign Up</h2>
+            <h2>Sign Up</h2>    
             <p>Please fill this form to create an account.</p>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                 <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                     <label>Username</label>
-                    <input type="text" name="username"class="form-control" value="<?php echo $username; ?>">
+                    <input type="text" name="username"class="form-control" id="username" value="<?php echo $username; ?>">
                     <span class="help-block"><?php echo $username_err; ?></span>
                 </div>    
                 <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                     <label>Email</label>
-                    <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+                    <input type="text" name="email" class="form-control"  id="email"value="<?php echo $email; ?>">
                     <span class="help-block"><?php echo $email_err; ?></span>
                 </div>
                 <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
