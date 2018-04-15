@@ -25,9 +25,11 @@ if ($page <= 0) {
 $prev = $page - 1;
 $next = $page + 1;
 
-$query = $link->prepare("SELECT post_id, post_title, LEFT(content, 200) ,date AS content FROM posts ORDER BY post_id DESC LIMIT $start, $per_page");
+$query = $link->prepare("SELECT u.name,u.avatar, p.date, p.post_id, p.post_title, LEFT(p.content, 200) AS content "
+        . "FROM users as u, posts as p WHERE u.user_id = p.user_id " 
+        . "ORDER BY p.post_id DESC LIMIT $start, $per_page");
 $query->execute();
-$query->bind_result($post_id, $post_title, $content,$date);
+$query->bind_result($name,$avatar, $date, $post_id, $post_title, $content);
 
 ?>
 
@@ -131,7 +133,7 @@ while ($query->fetch()):
     $lastspace = strrpos($content, ' ')
     ?>
                <div class="card mb-4">
-            <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+                   <img class="card-img-top" src="img/blog.png" alt="Card image cap">
                  <div class="card-body">
               <h2 class="card-title"><?php echo $post_title ?></h2>
                  
@@ -139,7 +141,7 @@ while ($query->fetch()):
             </div>
             <div class="card-footer text-muted">
               Posted on <?php echo $date ?> by
-              <a href="#">Blog</a>
+              <a href="#"><?php echo $name ?></a>  <img src='uploads/<?php echo$avatar?>' style='margin-right: 0%; height:24px;width: 24px;'>
             </div>
           </div>
 <?php endwhile ?>
