@@ -3,7 +3,7 @@
 require_once 'database.php';
 
 // Define variables and initialize with empty values
-$username = $password = $image="";
+$username = $password = $image = "";
 $username_err = $password_err = "";
 
 // Processing form data when form is submitted
@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username_err = 'Please enter username.';
     } else {
         $username = trim($_POST["username"]);
-       
     }
 
     // Check if password is empty
@@ -35,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Set parameters
             //$param_username = $username;
-            
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
                 echo "username exists";
@@ -62,14 +60,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //echo("ended");
 
                     if (mysqli_stmt_fetch($stmt)) {
-                        if ($password=== $hashed_password) {
+                        if ($password === $hashed_password) {
                             /* Password is correct, so start a new session and
                               save the username to the session */
                             session_start();
-                             $_SESSION['user_id'] = $id;
-                             $_SESSION['username'] = $username;
-                             $_SESSION['avatar'] = $image;
-                             
+                            $_SESSION['user_id'] = $id;
+                            $_SESSION['username'] = $username;
+                            $_SESSION['avatar'] = $image;
+
                             header("location: welcome.php");
                         } else {
                             // Display an error message if password is not valid
@@ -100,10 +98,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <meta charset="UTF-8">
         <title>Login</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-          <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="css/blog-home.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="css/blog-home.css" rel="stylesheet">
         <style type="text/css">
             body{ font: 14px sans-serif; }
             .wrapper{ width: 900px; padding: 160px; margin-left: 30%; }
@@ -115,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 font: 14px sans-serif;
                 text-align: center; 
             }
-           #ul1 {
+            #ul1 {
                 list-style-type: none;
                 margin: 0;
                 padding: 0;
@@ -131,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 border-right:1px solid #bbb;
             }
 
-              #li1:last-child {
+            #li1:last-child {
                 border-right: none;
             }
 
@@ -143,23 +141,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 text-decoration: none;
             }
 
-              #li1 a:hover:not(.active) {
+            #li1 a:hover:not(.active) {
                 background-color: #ff6666;
             }
 
-             #li1 .active {
+            #li1 .active {
                 background-color: #4CAF50;
+
+                span { clear:both; display:block; margin-bottom:30px; }
+                span a { font-weight:bold; color:#0099FF; }
+                label { margin-top:20px; margin-bottom:3px; font-weight:bold;}
+                #username { padding:2px 5px; }
+                span.exists {color:#FF0000;background:url(images/cross.png);}
+                span.aval { color:#00CC00; background:url(images/ok.png);}
+                span.wait { background:url(images/loading.gif);}
+                span.exists, span.aval, span.wait {font-weight:normal; display:inline; clear:none; background-repeat:no-repeat; background-position:left; padding: 5px 30px; }
             }
         </style>
+
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery_ajax.js"></script>
     </head>
     <body>
-                <div class="page-header">
+        <div class="page-header">
             <h1>Welcome to our site</h1>
             <div id="menu">
                 <ul id="ul1">
                     <li id="li1"><a href="#">Search For Blog</a></li>
                     <li id="li1"><a href="new_post.php">Create New Post</a></li>
-                     <li id="li1" style="float:right"><a href="index1.php">Home</a></li>
+                    <li id="li1" style="float:right"><a href="index1.php">Home</a></li>
                     <li id="li1" style="float:right"><a href="register.php">Register</a></li>
                     <li  id="li1"style="float:right"><a href="login.php">Log In</a></li>
                 </ul>            
@@ -171,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                     <label>Username</label>
-                    <input type="text" name="username"class="form-control" value="<?php echo $username; ?>">
+                    <input type="text" name="username" id="lu" class="form-control" value="<?php echo $username; ?>">
                     <span class="help-block"><?php echo $username_err; ?></span>
                 </div>    
                 <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
