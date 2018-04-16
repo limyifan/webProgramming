@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Close statement
         mysqli_stmt_close($stmt);
     }
-    // Validate email
+    // Validate email`
     if (empty(trim($_POST["email"]))) {
         $email_err = "Please enter a email.";
     } else {
