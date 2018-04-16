@@ -12,7 +12,7 @@ if (!is_numeric($post_id)) {
 }
 
 $sql = "SELECT post_title, content FROM posts WHERE post_id='$post_id'";
-$query = $link->query($sql);
+$query = $conn->query($sql);
 
 //echo $query->num_rows;  one for each post_id
 //
