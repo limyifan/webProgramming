@@ -18,7 +18,8 @@ if (isset($_POST['submit'])) {
     $title = $link->real_escape_string($title);
     $content = $link->real_escape_string($content);
     $user_id = $_SESSION['user_id'];
-    
+    $comment = strip_tags($_POST['comment']);
+    $comment = $link->real_escape_string($comment);
     //$date = date('Y-m-d- G:i:s);
 //    $date = date('1 js \of F Y h:i:s A');
 //    echo date('l jS \of F Y h:i:s A');
@@ -26,7 +27,7 @@ if (isset($_POST['submit'])) {
     $content = htmlentities($content);  //convert all html tags into html entitied to save space in db
     if ($title && $content) {
         //sql statement to store into our db
-        $query = $link->query("INSERT INTO posts (post_title, content, user_id, date) VALUES ('$title', '$content','$user_id','$timestamp')");
+        $query = $link->query("INSERT INTO posts (post_title, content, user_id, date, disable_comments) VALUES ('$title', '$content','$user_id','$timestamp', '$comment')");
 
         if ($query) {
             echo "Post Added Successfully";
@@ -36,7 +37,7 @@ if (isset($_POST['submit'])) {
     } else {
         echo "Please Complete your post";
     }
-}else{
+} else {
     echo "POST NOT SET 2";
 }
 ?>
@@ -69,7 +70,13 @@ and open the template in the editor.
                     <br>
                     <p>Enter some tags:</p>
                     <input type="text" name="tags"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="checkbox" name="disable_comments" value="disable_comments">Disable Comments<br><br/>
+                    <p>Disable Comments</p>
+<!--                    <input type="checkbox" id="get_value" name="disable_comments" value="disable_comments">Yes
+                    <input type="checkbox" id="get_value" name="disable_comments" value="disable_comments">No<br><br/>-->
+                    <select name="comment">
+                        <option value="0">YES</option>
+                        <option value="1">NO</option>
+                    </select><br><br/>
                     <input name="submit" type="submit" value="Post">
 
                 </form>
@@ -81,3 +88,4 @@ and open the template in the editor.
         </div>
     </body>
 </html>
+

@@ -11,7 +11,7 @@ if (!is_numeric($post_id)) {
     header('location: index.php');
 }
 
-$sql = "SELECT post_title, content FROM posts WHERE post_id='$post_id'";
+$sql = "SELECT post_title, content, disable_comments FROM posts WHERE post_id='$post_id'";
 $query = $link->query($sql);
 
 //echo $query->num_rows;  one for each post_id
