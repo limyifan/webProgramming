@@ -116,7 +116,7 @@ $query->bind_result($name,$avatar, $date, $post_id, $post_title, $content);
                 <article>
                     <h2><?php echo $post_title ?> </h2>
                     <p><?php echo substr($content, 0, $lastspace) . "<a href='view_post.php?post_id=$post_id'> READ MORE...</a>" ?></p>
-                    <img src='uploads/<?php echo$avatar?>' style='float: left; height:20px;width: 20px;'> <p>Posted on: <?php echo $date ?>. By: <?php echo $name ?></p>
+                    <img src='uploads/<?php echo$avatar?>' style='float: left; height:0px;width:50px;'> <p>Posted on: <?php echo $date ?>. By: <?php echo $name ?></p>
                 </article>
             <?php endwhile ?>
 
